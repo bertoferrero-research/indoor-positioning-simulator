@@ -1,4 +1,5 @@
 {
+    "simulation_duration_seconds": 60,
     "room_dim_meters":{
         "x": 20,
         "y": 17
