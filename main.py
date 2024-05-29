@@ -4,6 +4,7 @@ import json
 import random
 from classes.station import Station
 from classes.bufferedcsvfilewriter import BufferedCsvFileWriter
+from classes.modules.position.dummy import DummyPositionModule
 import datetime
 
 
@@ -65,8 +66,11 @@ class App:
             [station.frequency for station in self.stations])
         if milliseconds_per_iteration < 10:
             raise ValueError("Minimum frequency is 10 millisecond.")
-        pos_x = round(self.config['initial_position']['x'], ndigits=self.position_rounding)
-        pos_y = round(self.config['initial_position']['y'], ndigits=self.position_rounding)
+        pos_x = round(self.config['initial_position']
+                      ['x'], ndigits=self.position_rounding)
+        pos_y = round(self.config['initial_position']
+                      ['y'], ndigits=self.position_rounding)
+        speed = self.config['speed_meters_second']['min']
 
         # Define maximal and minimal x and y coordinates
         min_x = self.config['margin_meters']
@@ -95,6 +99,11 @@ class App:
         trajectory_writer.write(
             [iteration, current_time, pos_x, pos_y])
 
+        # Initialize modules
+        # TODO: use a Factory
+        # TODO: Define the attributes of the constructor
+        position_module = DummyPositionModule()
+
         try:
             # Main loop
             while True:
@@ -104,8 +113,12 @@ class App:
 
                 # Calculate the new position of the stations
                 # TODO: Implement the logic to calculate the new position of the stations
-                pos_x = round(random.uniform(min_x, max_x), ndigits=self.position_rounding)
-                pos_y = round(random.uniform(min_y, max_y), ndigits=self.position_rounding)
+                pos_x, pos_y = position_module.calculate_position(current_time=current_time, milliseconds_per_iteration=milliseconds_per_iteration,
+                                                                  current_x=pos_x, current_y=pos_y, min_x=min_x, max_x=max_x, min_y=min_y, max_y=max_y, speed=speed)
+                pos_x = round(pos_x,
+                              ndigits=self.position_rounding)
+                pos_y = round(pos_y,
+                              ndigits=self.position_rounding)
 
                 # Write the new position to the output file
                 trajectory_writer.write(
