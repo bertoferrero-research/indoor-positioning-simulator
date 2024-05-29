@@ -10,8 +10,8 @@
         "max": 1.5        
     },
     "initial_position": {
-        "x": 0,
-        "y": 0
+        "x": 3,
+        "y": 3
     },
     "initial_direction": {
         "x": 1,
