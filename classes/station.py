@@ -18,8 +18,8 @@ class Station:
         self._x = x
         self._y = y
         self._frequency = frequency
-        self._next_transmission_timestamp = 0
         self._last_transmission_timestamp = initial_timestamp
+        self._next_transmission_timestamp = initial_timestamp + frequency
 
     @property
     def mac(self):
