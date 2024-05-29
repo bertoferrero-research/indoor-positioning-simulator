@@ -27,7 +27,7 @@ class BufferedCsvFileWriter:
         self.buffer_size = buffer_size
         self.buffer = []
 
-    def write(self, line):
+    def write(self, line: list):
         """
         Appends a line to the buffer. If the buffer is full, it flushes the buffer to the file.
 

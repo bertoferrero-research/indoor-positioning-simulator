@@ -22,42 +22,42 @@ class Station:
         self._next_transmission_timestamp = initial_timestamp + frequency
 
     @property
-    def mac(self):
+    def mac(self) -> str:
         """
         str: The MAC address of the access point station.
         """
         return self._mac
 
     @property
-    def x(self):
+    def x(self) -> float:
         """
         float: The x-coordinate of the access point station's location.
         """
         return self._x
 
     @property
-    def y(self):
+    def y(self) -> float:
         """
         float: The y-coordinate of the access point station's location.
         """
         return self._y
 
     @property
-    def frequency(self):
+    def frequency(self) -> int:
         """
         int: The transmission frequency of the access point station in milliseconds.
         """
         return self._frequency
 
     @property
-    def last_transmission_timestamp(self):
+    def last_transmission_timestamp(self) -> int:
         """
         int: The timestamp of the last transmission made by the access point station.
         """
         return self._last_transmission_timestamp
 
     @last_transmission_timestamp.setter
-    def last_transmission_timestamp(self, timestamp):
+    def last_transmission_timestamp(self, timestamp: int):
         """
         Setter for the last transmission timestamp.
 
@@ -68,7 +68,7 @@ class Station:
         self._next_transmission_timestamp = self._last_transmission_timestamp + self._frequency
 
     @property
-    def next_transmission_timestamp(self):
+    def next_transmission_timestamp(self) -> int:
         """
         int: The timestamp of the next scheduled transmission by the access point station.
         """
