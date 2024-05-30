@@ -4,7 +4,7 @@ class Station:
     Class representing an access point station.
     '''
 
-    def __init__(self, mac: str, x: float, y: float, frequency: int, A1: float = None, A2: float = None, initial_timestamp: int = 0):
+    def __init__(self, mac: str, x: float, y: float, frequency: int, Tx: float = None, n: float = None, initial_timestamp: int = 0):
         """
         Constructor for the Station class.
 
@@ -13,16 +13,16 @@ class Station:
             x (float): The x-coordinate of the access point station's location.
             y (float): The y-coordinate of the access point station's location.
             frequency (int): The transmission frequency of the access point station in milliseconds.
-            A1 (float, optional): The A1 parameter of the access point station, used for the RSSI to Distance formula. Defaults to None.
-            A2 (float, optional): The A2 parameter of the access point station, used for the RSSI to Distance formula. Defaults to None.
+            Tx (float, optional): The Tx parameter of the access point station, used for the RSSI to Distance formula. Defaults to None.
+            n (float, optional): The n parameter of the access point station, used for the RSSI to Distance formula. Defaults to None.
             initial_timestamp (int, optional): The initial timestamp of the access point station. Defaults to 0.
         """
         self._mac = mac
         self._x = x
         self._y = y
         self._frequency = frequency
-        self._A1 = A1
-        self._A2 = A2
+        self._Tx = Tx
+        self._n = n
         self._last_transmission_timestamp = initial_timestamp
         self._next_transmission_timestamp = initial_timestamp + frequency
 
@@ -55,18 +55,18 @@ class Station:
         return self._frequency
 
     @property
-    def A1(self) -> float:
+    def Tx(self) -> float:
         """
-        float: The A1 parameter of the access point station.
+        float: The Tx parameter of the access point station.
         """
-        return self._A1
+        return self._Tx
 
     @property
-    def A2(self) -> float:
+    def n(self) -> float:
         """
-        float: The A2 parameter of the access point station.
+        float: The n parameter of the access point station.
         """
-        return self._A2
+        return self._n
 
     @property
     def last_transmission_timestamp(self) -> int:
