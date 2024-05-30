@@ -5,6 +5,7 @@ import random
 from classes.station import Station
 from classes.bufferedcsvfilewriter import BufferedCsvFileWriter
 from classes.simulators.trajectory.factory import TrajectoryFactory
+from classes.simulators.rssi.factory import RssiFactory
 import datetime
 
 
@@ -100,9 +101,11 @@ class App:
             [iteration, current_time, pos_x, pos_y])
 
         # Initialize simulators modules
-        # TODO: Define the attributes of the constructor
+        # TODO: Define the attributes for the constructors
         position_simulator_module = TrajectoryFactory.create_trajectory_simulator(
             self.config['simulators']['trajectory'])
+        rssi_simulator_module = RssiFactory.create_rssi_simulator(
+            self.config['simulators']['rssi'])
 
         try:
             # Main loop
@@ -126,15 +129,16 @@ class App:
 
                 # For each required station, generate the static RSSI value
                 for station in [station for station in self.stations if station.next_transmission_timestamp <= current_time]:
-                    # TODO: Implement the logic to calculate the RSSI value
-                    rssi = random.randint(-100, 0)
+                    # Calculate the RSSI value
+                    rssi = rssi_simulator_module.calculate_rssi(
+                        station=station, current_time=current_time, milliseconds_per_iteration=milliseconds_per_iteration, current_x=pos_x, current_y=pos_y, speed=speed)
                     # Set the last transmission timestamp
                     station.last_transmission_timestamp = current_time
                     # Write the RSSI value to the output file
                     rssi_writer.write(
                         [current_time, pos_x, pos_y, station.mac, rssi])
 
-                # Check we achieved the maximum execution time
+                # Check if we achieved the maximum execution time
                 if current_time >= max_time_milliseconds:
                     break
         finally:

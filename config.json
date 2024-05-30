@@ -18,6 +18,7 @@
         "y": 1
     },
     "simulators":{
-        "trajectory": "dummy"
+        "trajectory": "dummy",
+        "rssi": "dummy"
     }
 }

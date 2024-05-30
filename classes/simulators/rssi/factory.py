@@ -1,12 +1,12 @@
-from classes.simulators.trajectory.interface import TrajectoryInterface
+from classes.simulators.rssi.interface import RssiInterface
 
-class TrajectoryFactory:
+class RssiFactory:
     """
     A factory class for creating trajectory simulators.
     """
 
     @staticmethod
-    def create_trajectory_simulator(simulator_name: str) -> TrajectoryInterface:
+    def create_rssi_simulator(simulator_name: str) -> RssiInterface:
         """
         Creates a trajectory simulator based on the given simulator name.
 
@@ -20,7 +20,7 @@ class TrajectoryFactory:
             ValueError: If the simulator name is not available.
         """
         if simulator_name == 'dummy':
-            from classes.simulators.trajectory.dummy import DummyPositionModule
-            return DummyPositionModule()
+            from classes.simulators.rssi.dummy import DummyRssiModule
+            return DummyRssiModule()
         else:
-            raise ValueError(f"Trajectory simulator {simulator_name} not available.")
+            raise ValueError(f"Rssi simulator {simulator_name} not available.")
