@@ -4,7 +4,7 @@ import json
 import random
 from classes.station import Station
 from classes.bufferedcsvfilewriter import BufferedCsvFileWriter
-from classes.modules.position.dummy import DummyPositionModule
+from classes.simulators.trajectory.dummy import DummyPositionModule
 import datetime
 
 

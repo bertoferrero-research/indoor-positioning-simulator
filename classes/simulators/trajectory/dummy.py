@@ -1,4 +1,5 @@
-from positioninterface import PositionInterface
+from classes.simulators.trajectory.interface import PositionInterface
+import random
 
 class DummyPositionModule(PositionInterface):
 
