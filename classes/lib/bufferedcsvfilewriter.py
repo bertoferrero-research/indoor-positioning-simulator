@@ -23,9 +23,13 @@ class BufferedCsvFileWriter:
             filename (str): The name of the file to write to.
             buffer_size (int, optional): The maximum number of lines to buffer before writing to the file. Defaults to 1000.
         """
-        self.filename = filename
-        self.buffer_size = buffer_size
-        self.buffer = []
+        self._filename = filename
+        self._buffer_size = buffer_size
+        self._buffer = []
+
+    @property
+    def filename(self):
+        return self._filename
 
     def write(self, line: list):
         """
@@ -34,22 +38,22 @@ class BufferedCsvFileWriter:
         Args:
             line (list): The line to be written to the file.
         """
-        self.buffer.append(line)
-        if len(self.buffer) >= self.buffer_size:
+        self._buffer.append(line)
+        if len(self._buffer) >= self._buffer_size:
             self.flush()
 
     def flush(self):
         """
         Writes the contents of the buffer to the file.
         """
-        with open(self.filename, 'a+', newline='') as f:
+        with open(self._filename, 'a+', newline='') as f:
             writer = csv.writer(f)
-            writer.writerows(self.buffer)
-        self.buffer = []
+            writer.writerows(self._buffer)
+        self._buffer = []
 
     def close(self):
         """
         Flushes the buffer and closes the file.
         """
-        if self.buffer:
+        if self._buffer:
             self.flush()
