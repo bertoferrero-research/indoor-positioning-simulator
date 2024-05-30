@@ -2,8 +2,8 @@ import argparse
 import os
 import json
 import random
-from classes.station import Station
-from classes.bufferedcsvfilewriter import BufferedCsvFileWriter
+from classes.models.station import Station
+from classes.lib.bufferedcsvfilewriter import BufferedCsvFileWriter
 from classes.simulators.trajectory.factory import TrajectoryFactory
 from classes.simulators.rssi.factory import RssiFactory
 import datetime

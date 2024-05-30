@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from classes.station import Station
+from classes.models.station import Station
 
 class RssiInterface(ABC):
 

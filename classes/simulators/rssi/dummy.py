@@ -1,5 +1,5 @@
 from classes.simulators.rssi.interface import RssiInterface
-from classes.station import Station
+from classes.models.station import Station
 import random
 
 class DummyRssiModule(RssiInterface):
