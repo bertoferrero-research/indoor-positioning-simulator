@@ -22,5 +22,8 @@ class TrajectoryFactory:
         if simulator_name == 'dummy':
             from classes.simulators.trajectory.dummy import DummyPositionModule
             return DummyPositionModule()
+        elif simulator_name == 'daniscemgil2017':
+            from classes.simulators.trajectory.daniscemgil2017 import DanisCemgil2017
+            return DanisCemgil2017()
         else:
             raise ValueError(f"Trajectory simulator {simulator_name} not available.")

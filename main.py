@@ -7,6 +7,7 @@ from classes.lib.bufferedcsvfilewriter import BufferedCsvFileWriter
 from classes.simulators.trajectory.factory import TrajectoryFactory
 from classes.simulators.rssi.factory import RssiFactory
 import datetime
+import numpy as np
 
 
 class App:
@@ -72,6 +73,7 @@ class App:
         pos_y = round(self.config['initial_position']
                       ['y'], ndigits=self.position_rounding)
         speed = self.config['speed_meters_second']['min']
+        angle = self.config.get('initial_angle', np.random.uniform(0, 2 * np.pi))
 
         # Define maximal and minimal x and y coordinates
         min_x = self.config['margin_meters']
@@ -115,9 +117,8 @@ class App:
                 current_time += milliseconds_per_iteration
 
                 # Calculate the new position of the stations
-                # TODO: Implement the logic to calculate the new position of the stations
-                pos_x, pos_y = position_simulator_module.calculate_position(current_time=current_time, milliseconds_per_iteration=milliseconds_per_iteration,
-                                                                            current_x=pos_x, current_y=pos_y, min_x=min_x, max_x=max_x, min_y=min_y, max_y=max_y, speed=speed)
+                pos_x, pos_y, angle = position_simulator_module.calculate_position(current_time=current_time, milliseconds_per_iteration=milliseconds_per_iteration,
+                                                                            last_angle=angle, last_x=pos_x, last_y=pos_y, min_x=min_x, max_x=max_x, min_y=min_y, max_y=max_y, speed=speed)
                 pos_x = round(pos_x,
                               ndigits=self.position_rounding)
                 pos_y = round(pos_y,

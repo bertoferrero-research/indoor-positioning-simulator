@@ -13,12 +13,9 @@
         "x": 1,
         "y": 1
     },
-    "initial_direction": {
-        "x": 1,
-        "y": 1
-    },
+    "initial_angle": 0,
     "simulators":{
-        "trajectory": "dummy",
+        "trajectory": "daniscemgil2017",
         "rssi": "logdistance"
     }
 }
