@@ -82,7 +82,8 @@ class App:
         pos_y = round(self.config['initial_position']
                       ['y'], ndigits=self.position_rounding)
         speed = self.config['speed_meters_second']['min']
-        angle = self.config.get('initial_angle', np.random.uniform(0, 2 * np.pi))
+        angle = self.config.get(
+            'initial_angle', np.random.uniform(0, 2 * np.pi))
 
         # Create output file writers
         # Concatenate date and time to the file names
@@ -119,7 +120,7 @@ class App:
 
                 # Calculate the new position of the stations
                 pos_x, pos_y, angle = position_simulator_module.calculate_position(current_time=current_time, milliseconds_per_iteration=milliseconds_per_iteration,
-                                                                            last_angle=angle, last_x=pos_x, last_y=pos_y, min_x=min_x, max_x=max_x, min_y=min_y, max_y=max_y, speed=speed)
+                                                                                   last_angle=angle, last_x=pos_x, last_y=pos_y, min_x=min_x, max_x=max_x, min_y=min_y, max_y=max_y, speed=speed)
                 pos_x = round(pos_x,
                               ndigits=self.position_rounding)
                 pos_y = round(pos_y,
@@ -151,7 +152,6 @@ class App:
             rssi_writer.close()
             trajectory_writer.close()
 
-        
         # Plot the trajectory data
         import matplotlib.pyplot as plt
         import pandas as pd
@@ -159,21 +159,27 @@ class App:
         # Load the trajectory data file
         trajectory_data = pd.read_csv(trajectory_writer.filename)
 
+
         # Plot the scenario
         plt.figure(figsize=(10, 10))
         # Draw the room and margins
-        plt.plot([0, dim_x,  dim_x, 0, 0], [0, 0, dim_y, dim_y, 0], 'k-', label='Room')
-        plt.plot([min_x, max_x, max_x, min_x, min_x], [min_y, min_y, max_y, max_y, min_y], 'g-', label='Margins')
+        plt.plot([0, dim_y,  dim_y, 0, 0], [0, 0, dim_x, dim_x, 0], 'k-', label='Room')
+        plt.plot([min_y, max_y, max_y, min_y, min_y], [
+                min_x, min_x, max_x, max_x, min_x], 'g-', label='Margins')
         # Draw the trajectory
-        plt.plot(trajectory_data['position_x'], trajectory_data['position_y'], 'b-')
-        plt.scatter(trajectory_data['position_x'], trajectory_data['position_y'], c=trajectory_data['timestamp'], cmap='viridis')
+        plt.plot(trajectory_data['position_y'], trajectory_data['position_x'], 'b-')
+        plt.scatter(trajectory_data['position_y'], trajectory_data['position_x'],
+                    c=trajectory_data['timestamp'], cmap='viridis')
         plt.colorbar(label='Time [ms]')
-        plt.xlabel('X [m]')
-        plt.ylabel('Y [m]')
+        plt.xlabel('Y [m]')
+        plt.ylabel('X [m]')
         plt.title('Robot Trajectory')
         plt.grid(True)
-        plt.show()
 
+        # Invert Y axis
+        plt.gca().invert_yaxis()
+
+        plt.show()
 
 
 def main():

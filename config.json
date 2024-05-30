@@ -10,8 +10,8 @@
         "max": 1.5        
     },
     "initial_position": {
-        "x": 1,
-        "y": 1
+        "x": 2,
+        "y": 2
     },
     "initial_angle": 0,
     "simulators":{
