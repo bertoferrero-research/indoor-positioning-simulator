@@ -22,5 +22,8 @@ class RssiFactory:
         if simulator_name == 'dummy':
             from classes.simulators.rssi.dummy import DummyRssiModule
             return DummyRssiModule()
+        elif simulator_name == 'logdistance':
+            from classes.simulators.rssi.logdistance import LogDistancePathLossModel
+            return LogDistancePathLossModel()
         else:
             raise ValueError(f"Rssi simulator {simulator_name} not available.")

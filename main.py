@@ -134,6 +134,9 @@ class App:
                         station=station, current_time=current_time, milliseconds_per_iteration=milliseconds_per_iteration, current_x=pos_x, current_y=pos_y, speed=speed)
                     # Set the last transmission timestamp
                     station.last_transmission_timestamp = current_time
+                    # Check if the signal is valid
+                    if rssi is None or rssi < -99:
+                        continue
                     # Write the RSSI value to the output file
                     rssi_writer.write(
                         [current_time, pos_x, pos_y, station.mac, rssi])
