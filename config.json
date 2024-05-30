@@ -16,5 +16,8 @@
     "initial_direction": {
         "x": 1,
         "y": 1
+    },
+    "simulators":{
+        "trajectory": "dummy"
     }
 }

@@ -4,7 +4,7 @@ import json
 import random
 from classes.station import Station
 from classes.bufferedcsvfilewriter import BufferedCsvFileWriter
-from classes.simulators.trajectory.dummy import DummyPositionModule
+from classes.simulators.trajectory.factory import TrajectoryFactory
 import datetime
 
 
@@ -99,10 +99,10 @@ class App:
         trajectory_writer.write(
             [iteration, current_time, pos_x, pos_y])
 
-        # Initialize modules
-        # TODO: use a Factory
+        # Initialize simulators modules
         # TODO: Define the attributes of the constructor
-        position_module = DummyPositionModule()
+        position_simulator_module = TrajectoryFactory.create_trajectory_simulator(
+            self.config['simulators']['trajectory'])
 
         try:
             # Main loop
@@ -113,8 +113,8 @@ class App:
 
                 # Calculate the new position of the stations
                 # TODO: Implement the logic to calculate the new position of the stations
-                pos_x, pos_y = position_module.calculate_position(current_time=current_time, milliseconds_per_iteration=milliseconds_per_iteration,
-                                                                  current_x=pos_x, current_y=pos_y, min_x=min_x, max_x=max_x, min_y=min_y, max_y=max_y, speed=speed)
+                pos_x, pos_y = position_simulator_module.calculate_position(current_time=current_time, milliseconds_per_iteration=milliseconds_per_iteration,
+                                                                            current_x=pos_x, current_y=pos_y, min_x=min_x, max_x=max_x, min_y=min_y, max_y=max_y, speed=speed)
                 pos_x = round(pos_x,
                               ndigits=self.position_rounding)
                 pos_y = round(pos_y,
