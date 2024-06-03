@@ -84,6 +84,10 @@ class App:
         plt.title('Mobile device Trajectory')
         plt.grid(True)
 
+        # Draw the stations
+        for station in self.stations:
+            plt.plot(station.y, station.x, 'ro', label=f"Station {station.mac}")
+
         # Invert Y axis
         plt.gca().invert_yaxis()
 
