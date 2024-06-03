@@ -4,6 +4,7 @@
         "x": 0,
         "y": 0,
         "frequency": 300,
+        "initial_timestamp": 15,
         "Tx": -30.000000601734428,
         "n": 4.564021842103135,
         "noise_std_dev": 2
