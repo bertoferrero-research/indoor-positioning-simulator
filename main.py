@@ -64,10 +64,10 @@ class App:
         max_time_milliseconds = self.config['simulation_duration_seconds'] * 1000
         current_time = 0
         iteration = 0
-        milliseconds_per_iteration = min(
-            [station.frequency for station in self.stations])
-        if milliseconds_per_iteration < 10:
-            raise ValueError("Minimum frequency is 10 millisecond.")
+        # min([station.frequency for station in self.stations])
+        milliseconds_per_iteration = 1
+        # if milliseconds_per_iteration < 10:
+        #    raise ValueError("Minimum frequency is 10 millisecond.")
 
         # Define maximal and minimal x and y coordinates
         dim_x = self.config['room_dim_meters']['x']
@@ -104,12 +104,17 @@ class App:
         trajectory_writer.write(
             [iteration, current_time, pos_x, pos_y])
 
+        # Extract simulators configuration
+        simulators_config = self.config.get('simulators', {})
+        trajectory_parameters_list = simulators_config.get('trajectory_parameters', {})
+        rssi_parameters_list = simulators_config.get('rssi_parameters', {})
         # Initialize simulators modules
-        # TODO: Define the attributes for the constructors
         position_simulator_module = TrajectoryFactory.create_trajectory_simulator(
-            self.config['simulators']['trajectory'])
+            simulators_config['trajectory'],
+            trajectory_parameters_list.get(simulators_config['trajectory'], {}))
         rssi_simulator_module = RssiFactory.create_rssi_simulator(
-            self.config['simulators']['rssi'])
+            simulators_config['rssi'],
+            rssi_parameters_list.get(simulators_config['rssi'], {}))
 
         try:
             # Main loop
@@ -159,15 +164,16 @@ class App:
         # Load the trajectory data file
         trajectory_data = pd.read_csv(trajectory_writer.filename)
 
-
         # Plot the scenario
         plt.figure(figsize=(10, 10))
         # Draw the room and margins
-        plt.plot([0, dim_y,  dim_y, 0, 0], [0, 0, dim_x, dim_x, 0], 'k-', label='Room')
+        plt.plot([0, dim_y,  dim_y, 0, 0], [
+                 0, 0, dim_x, dim_x, 0], 'k-', label='Room')
         plt.plot([min_y, max_y, max_y, min_y, min_y], [
-                min_x, min_x, max_x, max_x, min_x], 'g-', label='Margins')
+            min_x, min_x, max_x, max_x, min_x], 'g-', label='Margins')
         # Draw the trajectory
-        plt.plot(trajectory_data['position_y'], trajectory_data['position_x'], 'b-')
+        plt.plot(trajectory_data['position_y'],
+                 trajectory_data['position_x'], 'b-')
         plt.scatter(trajectory_data['position_y'], trajectory_data['position_x'],
                     c=trajectory_data['timestamp'], cmap='viridis')
         plt.colorbar(label='Time [ms]')

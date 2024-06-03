@@ -15,7 +15,14 @@
     },
     "initial_angle": 0,
     "simulators":{
-        "trajectory": "daniscemgil2017",
-        "rssi": "logdistance"
+        "trajectory": "daniscemgil2017custom",
+        "trajectory_parameters": {
+            "daniscemgil2017custom": {
+                "keep_angle_ms": 300
+            }
+        },
+        "rssi": "logdistance",
+        "rssi_parameters": {
+        }
     }
 }

@@ -6,12 +6,13 @@ class TrajectoryFactory:
     """
 
     @staticmethod
-    def create_trajectory_simulator(simulator_name: str) -> TrajectoryInterface:
+    def create_trajectory_simulator(simulator_name: str, constructor_params: dict = {}) -> TrajectoryInterface:
         """
         Creates a trajectory simulator based on the given simulator name.
 
         Args:
             simulator_name (str): The name of the simulator.
+            constructor_params (dict): Optional dictionary of constructor parameters.
 
         Returns:
             TrajectoryInterface: An instance of the trajectory simulator.
@@ -21,12 +22,12 @@ class TrajectoryFactory:
         """
         if simulator_name == 'dummy':
             from classes.simulators.trajectory.dummy import DummyPositionModule
-            return DummyPositionModule()
+            return DummyPositionModule(**constructor_params)
         elif simulator_name == 'daniscemgil2017':
             from classes.simulators.trajectory.daniscemgil2017 import DanisCemgil2017
-            return DanisCemgil2017()
+            return DanisCemgil2017(**constructor_params)
         elif simulator_name == 'daniscemgil2017custom':
             from classes.simulators.trajectory.daniscemgil2017custom import DanisCemgil2017Custom
-            return DanisCemgil2017Custom()
+            return DanisCemgil2017Custom(**constructor_params)
         else:
             raise ValueError(f"Trajectory simulator {simulator_name} not available.")
