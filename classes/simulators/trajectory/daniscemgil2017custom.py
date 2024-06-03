@@ -38,7 +38,7 @@ class DanisCemgil2017Custom(TrajectoryInterface):
         y = last_y
 
         # Calculamos el angulo de avance
-        # Manipulación del valor de rotación para mantener al robot dentro del área
+        # Manipulación del valor de rotación para mantener al dispositivo movil dentro del área
         delta_angle = 0
         if x < min_x or x > max_x or y < min_y or y > max_y:
             delta_angle = self.outbounds_ration

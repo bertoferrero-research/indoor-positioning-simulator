@@ -100,10 +100,6 @@ class App:
         trajectory_writer.write(
             ['step', 'timestamp', 'position_x', 'position_y'])
 
-        # Write the initial position
-        trajectory_writer.write(
-            [iteration, current_time, pos_x, pos_y])
-
         # Extract simulators configuration
         simulators_config = self.config.get('simulators', {})
         trajectory_parameters_list = simulators_config.get('trajectory_parameters', {})
@@ -121,17 +117,8 @@ class App:
             while True:
                 # Increase counters
                 iteration += 1
-                current_time += milliseconds_per_iteration
 
-                # Calculate the new position of the stations
-                pos_x, pos_y, angle = position_simulator_module.calculate_position(current_time=current_time, milliseconds_per_iteration=milliseconds_per_iteration,
-                                                                                   last_angle=angle, last_x=pos_x, last_y=pos_y, min_x=min_x, max_x=max_x, min_y=min_y, max_y=max_y, speed=speed)
-                pos_x = round(pos_x,
-                              ndigits=self.position_rounding)
-                pos_y = round(pos_y,
-                              ndigits=self.position_rounding)
-
-                # Write the new position to the output file
+                # Write the current position to the output file
                 trajectory_writer.write(
                     [iteration, current_time, pos_x, pos_y])
 
@@ -150,8 +137,18 @@ class App:
                         [current_time, pos_x, pos_y, station.mac, rssi])
 
                 # Check if we achieved the maximum execution time
+                current_time += milliseconds_per_iteration
                 if current_time >= max_time_milliseconds:
-                    break
+                    break                
+
+                # Calculate the next position of the mobile device
+                pos_x, pos_y, angle = position_simulator_module.calculate_position(current_time=current_time, milliseconds_per_iteration=milliseconds_per_iteration,
+                                                                                   last_angle=angle, last_x=pos_x, last_y=pos_y, min_x=min_x, max_x=max_x, min_y=min_y, max_y=max_y, speed=speed)
+                pos_x = round(pos_x,
+                              ndigits=self.position_rounding)
+                pos_y = round(pos_y,
+                              ndigits=self.position_rounding)
+                
         finally:
             # Close the output file writers
             rssi_writer.close()
@@ -179,7 +176,7 @@ class App:
         plt.colorbar(label='Time [ms]')
         plt.xlabel('Y [m]')
         plt.ylabel('X [m]')
-        plt.title('Robot Trajectory')
+        plt.title('Mobile device Trajectory')
         plt.grid(True)
 
         # Invert Y axis
