@@ -59,6 +59,38 @@ class App:
                 raise ValueError("Invalid station definition format.")
             self.stations.append(Station(**station))
 
+    def plot(self, trajectory_csv_file: str, dim_x: float, dim_y: float, min_x: float, max_x: float, min_y: float, max_y: float, output_name: str):
+        import matplotlib.pyplot as plt
+        import pandas as pd
+
+        # Load the trajectory data file
+        trajectory_data = pd.read_csv(trajectory_csv_file)
+
+        # Plot the scenario
+        plt.figure(figsize=(10, 10))
+        # Draw the room and margins
+        plt.plot([0, dim_y,  dim_y, 0, 0], [
+                 0, 0, dim_x, dim_x, 0], 'k-', label='Room')
+        plt.plot([min_y, max_y, max_y, min_y, min_y], [
+            min_x, min_x, max_x, max_x, min_x], 'g-', label='Margins')
+        # Draw the trajectory
+        plt.plot(trajectory_data['position_y'],
+                 trajectory_data['position_x'], 'b-')
+        plt.scatter(trajectory_data['position_y'], trajectory_data['position_x'],
+                    c=trajectory_data['timestamp'], cmap='viridis')
+        plt.colorbar(label='Time [ms]')
+        plt.xlabel('Y [m]')
+        plt.ylabel('X [m]')
+        plt.title('Mobile device Trajectory')
+        plt.grid(True)
+
+        # Invert Y axis
+        plt.gca().invert_yaxis()
+
+        # Save as PNG and EPS
+        plt.savefig(os.path.join(self.output_dir, f"{output_name}.png"))
+        plt.savefig(os.path.join(self.output_dir, f"{output_name}.eps"))
+
     def start(self):
         # Initialize main variables
         max_time_milliseconds = self.config['simulation_duration_seconds'] * 1000
@@ -155,34 +187,8 @@ class App:
             trajectory_writer.close()
 
         # Plot the trajectory data
-        import matplotlib.pyplot as plt
-        import pandas as pd
-
-        # Load the trajectory data file
-        trajectory_data = pd.read_csv(trajectory_writer.filename)
-
-        # Plot the scenario
-        plt.figure(figsize=(10, 10))
-        # Draw the room and margins
-        plt.plot([0, dim_y,  dim_y, 0, 0], [
-                 0, 0, dim_x, dim_x, 0], 'k-', label='Room')
-        plt.plot([min_y, max_y, max_y, min_y, min_y], [
-            min_x, min_x, max_x, max_x, min_x], 'g-', label='Margins')
-        # Draw the trajectory
-        plt.plot(trajectory_data['position_y'],
-                 trajectory_data['position_x'], 'b-')
-        plt.scatter(trajectory_data['position_y'], trajectory_data['position_x'],
-                    c=trajectory_data['timestamp'], cmap='viridis')
-        plt.colorbar(label='Time [ms]')
-        plt.xlabel('Y [m]')
-        plt.ylabel('X [m]')
-        plt.title('Mobile device Trajectory')
-        plt.grid(True)
-
-        # Invert Y axis
-        plt.gca().invert_yaxis()
-
-        plt.show()
+        self.plot(trajectory_csv_file=trajectory_writer.filename, dim_x=dim_x, dim_y=dim_y, min_x=min_x, max_x=max_x, min_y=min_y, max_y=max_y, output_name=f'trajectory_{current_datetime}')
+        
 
 
 def main():
