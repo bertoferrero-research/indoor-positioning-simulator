@@ -4,7 +4,7 @@ class Station:
     Class representing an access point station.
     '''
 
-    def __init__(self, mac: str, x: float, y: float, frequency: int, Tx: float = None, n: float = None, initial_timestamp: int = 0):
+    def __init__(self, mac: str, x: float, y: float, frequency: int, Tx: float = None, n: float = None, noise_std_dev: float = 0, initial_timestamp: int = 0):
         """
         Constructor for the Station class.
 
@@ -15,6 +15,7 @@ class Station:
             frequency (int): The transmission frequency of the access point station in milliseconds.
             Tx (float, optional): The Tx parameter of the access point station, used for the RSSI to Distance formula. Defaults to None.
             n (float, optional): The n parameter of the access point station, used for the RSSI to Distance formula. Defaults to None.
+            noise_std_dev (float, optional): The standard deviation of the noise of the access point station to add to RSSI simulation results. Defaults to 0.
             initial_timestamp (int, optional): The initial timestamp of the access point station. Defaults to 0.
         """
         self._mac = mac
@@ -23,6 +24,7 @@ class Station:
         self._frequency = frequency
         self._Tx = Tx
         self._n = n
+        self._noise_std_dev = noise_std_dev
         self._last_transmission_timestamp = initial_timestamp
         self._next_transmission_timestamp = initial_timestamp + frequency
 
@@ -67,6 +69,13 @@ class Station:
         float: The n parameter of the access point station.
         """
         return self._n
+    
+    @property
+    def noise_std_dev(self) -> float:
+        """
+        float: The standard deviation of the noise of the access point station to add to RSSI simulation results.
+        """
+        return self._noise_std_dev
 
     @property
     def last_transmission_timestamp(self) -> int:

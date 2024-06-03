@@ -22,6 +22,11 @@ class LogDistancePathLossModel(RssiInterface):
         else:
             rssi = Tx
 
+        # Add noise to the rssi
+        if station.noise_std_dev > 0:
+            noise = np.random.normal(0, station.noise_std_dev)
+            rssi += noise
+
         if rssi < -100:
             return None
             
