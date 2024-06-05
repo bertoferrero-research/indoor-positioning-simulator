@@ -166,7 +166,7 @@ class App:
                     # Set the last transmission timestamp
                     station.last_transmission_timestamp = current_time
                     # Check if the signal is valid
-                    if rssi is None or rssi < -99:
+                    if rssi is None:
                         continue
                     # Write the RSSI value to the output file
                     rssi_writer.write(
