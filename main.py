@@ -117,7 +117,7 @@ class App:
                       ['x'], ndigits=self.position_rounding)
         pos_y = round(self.config['initial_position']
                       ['y'], ndigits=self.position_rounding)
-        speed = self.config['speed_meters_second']['min']
+        speed = self.config['speed_meters_second']
         angle = self.config.get(
             'initial_angle', np.random.uniform(0, 2 * np.pi))
 

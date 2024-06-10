@@ -5,10 +5,7 @@
         "y": 17
     },
     "margin_meters": 1,
-    "speed_meters_second": {
-        "min": 0.5,
-        "max": 1.5        
-    },
+    "speed_meters_second": 0.5,
     "initial_position": {
         "x": 2,
         "y": 2
