@@ -196,12 +196,14 @@ class App:
 
 
 def main():
+    # Set default config dir
+    default_config_dir = os.path.join(os.path.dirname(__file__), 'config', 'sample')
     # Load arguments
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '--config', default=os.path.join(os.path.dirname(__file__), 'config.json'))
+        '--config', default=os.path.join(default_config_dir, 'config.json'))
     parser.add_argument(
-        '--stations', default=os.path.join(os.path.dirname(__file__), 'stations.json'))
+        '--stations', default=os.path.join(default_config_dir, 'stations.json'))
     parser.add_argument(
         '--outdir', default=os.path.join(os.path.dirname(__file__), 'output/'))
     args = parser.parse_args()
