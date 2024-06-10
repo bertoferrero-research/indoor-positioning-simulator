@@ -4,7 +4,7 @@
         "x": 20,
         "y": 17
     },
-    "margin_meters": 0.5,
+    "margin_meters": 1,
     "speed_meters_second": 0.5,
     "initial_position": {
         "x": 2,
