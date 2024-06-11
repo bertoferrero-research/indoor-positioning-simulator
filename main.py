@@ -1,4 +1,5 @@
 import argparse
+import math
 import os
 import json
 import random
@@ -77,10 +78,10 @@ class App:
         plt.plot(trajectory_data['position_y'],
                  trajectory_data['position_x'], 'b-')
         plt.scatter(trajectory_data['position_y'], trajectory_data['position_x'],
-                    c=trajectory_data['timestamp'], cmap='viridis')
-        plt.colorbar(label='Time [ms]')
-        plt.xlabel('Y [m]')
-        plt.ylabel('X [m]')
+                    c=trajectory_data['timestamp']/1000, cmap='viridis')
+        plt.colorbar(label='Time (sec.)')
+        plt.xlabel('Y (m)')
+        plt.ylabel('X (m)')
         plt.title('Mobile device Trajectory')
         plt.grid(True)
 
@@ -118,8 +119,8 @@ class App:
         pos_y = round(self.config['initial_position']
                       ['y'], ndigits=self.position_rounding)
         speed = self.config['speed_meters_second']
-        angle = self.config.get(
-            'initial_angle', np.random.uniform(0, 2 * np.pi))
+        angle = math.radians(self.config.get(
+            'initial_angle_degrees', np.random.uniform(0, 360)))
 
         # Create output file writers
         # Concatenate date and time to the file names
@@ -197,7 +198,7 @@ class App:
 
 def main():
     # Set default config dir
-    default_config_dir = os.path.join(os.path.dirname(__file__), 'config', 'sample')
+    default_config_dir = os.path.join(os.path.dirname(__file__), 'config', 'danis2022')
     # Load arguments
     parser = argparse.ArgumentParser()
     parser.add_argument(
