@@ -157,7 +157,7 @@ class App:
 
                 # Write the current position to the output file
                 trajectory_writer.write(
-                    [iteration, current_time, pos_x, pos_y])
+                    [iteration, current_time/1000, pos_x, pos_y])
 
                 # For each required station, generate the static RSSI value
                 for station in [station for station in self.stations if station.next_transmission_timestamp <= current_time]:
@@ -171,7 +171,7 @@ class App:
                         continue
                     # Write the RSSI value to the output file
                     rssi_writer.write(
-                        [current_time, pos_x, pos_y, station.mac, rssi])
+                        [current_time/1000, pos_x, pos_y, station.mac, rssi])
 
                 # Check if we achieved the maximum execution time
                 current_time += milliseconds_per_iteration
