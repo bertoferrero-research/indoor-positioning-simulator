@@ -31,3 +31,24 @@ class LogDistancePathLossModel(RssiInterface):
             return None
             
         return round(rssi)
+    
+    def should_miss_package(self, station: Station, distance: float) -> bool:
+
+        # 1 - Determine if have all the requierd params
+        if station.missing_packages_probability == None:
+            return False
+        
+        function_model = station.missing_packages_probability.get('function_model', None)
+        function_params = station.missing_packages_probability.get('params', None)
+        if function_model == None or function_params == None:
+            return False
+        
+        # 2 - Calculate the probability
+        if function_model == 'sigmoid':
+            return self.__linear_model(station, distance, function_params)
+        elif function_model == 'exponential':
+            return self.__exponential_model(station, distance, function_params)
+        else:
+            return False
+
+        return random.random() < station.missing_packages_probability

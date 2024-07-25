@@ -7,7 +7,14 @@
         "initial_timestamp": 0,
         "Tx": -58.29111418190961,
         "n": 1.8961618351023355,
-        "noise_std_dev": 5.373610075920007
+        "noise_std_dev": 5.373610075920007,
+        "missing_packages_probability":{
+            "function_model": "sigmoid",
+            "params": {
+                "a": 0.10899836170011085,
+                "b": 36.41524084104873
+            }
+        }
     },
     {
         "mac": "000000000101",
@@ -17,7 +24,14 @@
         "initial_timestamp": 0,
         "Tx": -59.55000670027184,
         "n": 1.6200933678638467,
-        "noise_std_dev": 6.128864260194349
+        "noise_std_dev": 6.128864260194349,
+        "missing_packages_probability":{
+            "function_model": "sigmoid",
+            "params": {
+                "a": 0.10899836170011085,
+                "b": 36.41524084104873
+            }
+        }
     },
     {
         "mac": "000000000102",
@@ -27,7 +41,14 @@
         "initial_timestamp": 0,
         "Tx": -60.532361643502014,
         "n": 1.3856582079610256,
-        "noise_std_dev": 4.632636823479881
+        "noise_std_dev": 4.632636823479881,
+        "missing_packages_probability":{
+            "function_model": "sigmoid",
+            "params": {
+                "a": 0.10899836170011085,
+                "b": 36.41524084104873
+            }
+        }
     },
     {
         "mac": "b827eb917e19",
@@ -37,7 +58,14 @@
         "initial_timestamp": 0,
         "Tx": -59.54136627191424,
         "n": 1.7995755574413281,
-        "noise_std_dev": 5.701281825055663
+        "noise_std_dev": 5.701281825055663,
+        "missing_packages_probability":{
+            "function_model": "sigmoid",
+            "params": {
+                "a": 0.10899836170011085,
+                "b": 36.41524084104873
+            }
+        }
     },
     {
         "mac": "000000000201",
@@ -47,7 +75,14 @@
         "initial_timestamp": 0,
         "Tx": -63.69416315705905,
         "n": 1.2201665379241144,
-        "noise_std_dev": 5.060288643297295
+        "noise_std_dev": 5.060288643297295,
+        "missing_packages_probability":{
+            "function_model": "sigmoid",
+            "params": {
+                "a": 0.10899836170011085,
+                "b": 36.41524084104873
+            }
+        }
     },
     {
         "mac": "000000000202",
@@ -57,7 +92,14 @@
         "initial_timestamp": 0,
         "Tx": -58.69099326936757,
         "n": 1.6225381723747412,
-        "noise_std_dev": 5.488886821456578
+        "noise_std_dev": 5.488886821456578,
+        "missing_packages_probability":{
+            "function_model": "sigmoid",
+            "params": {
+                "a": 0.10899836170011085,
+                "b": 36.41524084104873
+            }
+        }
     },
     {
         "mac": "b827ebf7d096",
@@ -67,7 +109,14 @@
         "initial_timestamp": 0,
         "Tx": -60.08173844566951,
         "n": 2.176557133023411,
-        "noise_std_dev": 5.756766747374154
+        "noise_std_dev": 5.756766747374154,
+        "missing_packages_probability":{
+            "function_model": "sigmoid",
+            "params": {
+                "a": 0.10899836170011085,
+                "b": 36.41524084104873
+            }
+        }
     },
     {
         "mac": "000000000301",
@@ -77,7 +126,14 @@
         "initial_timestamp": 0,
         "Tx": -64.5670293968093,
         "n": 1.151262278942531,
-        "noise_std_dev": 5.009041793821652
+        "noise_std_dev": 5.009041793821652,
+        "missing_packages_probability":{
+            "function_model": "sigmoid",
+            "params": {
+                "a": 0.10899836170011085,
+                "b": 36.41524084104873
+            }
+        }
     },
     {
         "mac": "000000000302",
@@ -87,7 +143,14 @@
         "initial_timestamp": 0,
         "Tx": -66.91658425865305,
         "n": 0.894615116411621,
-        "noise_std_dev": 5.219341349772518
+        "noise_std_dev": 5.219341349772518,
+        "missing_packages_probability":{
+            "function_model": "sigmoid",
+            "params": {
+                "a": 0.10899836170011085,
+                "b": 36.41524084104873
+            }
+        }
     },
     {
         "mac": "b827ebfd7811",
@@ -97,7 +160,14 @@
         "initial_timestamp": 0,
         "Tx": -58.43198802684983,
         "n": 2.0218359391611123,
-        "noise_std_dev": 5.660649271114479
+        "noise_std_dev": 5.660649271114479,
+        "missing_packages_probability":{
+            "function_model": "sigmoid",
+            "params": {
+                "a": 0.10899836170011085,
+                "b": 36.41524084104873
+            }
+        }
     },
     {
         "mac": "000000000401",
@@ -107,7 +177,14 @@
         "initial_timestamp": 0,
         "Tx": -59.141590936401286,
         "n": 1.2376612376054776,
-        "noise_std_dev": 5.687884055447422
+        "noise_std_dev": 5.687884055447422,
+        "missing_packages_probability":{
+            "function_model": "sigmoid",
+            "params": {
+                "a": 0.10899836170011085,
+                "b": 36.41524084104873
+            }
+        }
     },
     {
         "mac": "000000000402",
@@ -117,6 +194,13 @@
         "initial_timestamp": 0,
         "Tx": -62.70317489313807,
         "n": 1.3486448176153376,
-        "noise_std_dev": 5.15952388041625
+        "noise_std_dev": 5.15952388041625,
+        "missing_packages_probability":{
+            "function_model": "sigmoid",
+            "params": {
+                "a": 0.10899836170011085,
+                "b": 36.41524084104873
+            }
+        }
     }
 ]
