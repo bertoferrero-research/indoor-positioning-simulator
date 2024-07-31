@@ -61,7 +61,7 @@ class Station:
         return self._frequency
 
     @property
-    def Tx(self) -> float | None:
+    def Tx(self) -> Union[float, None]:
         """
         Returns the Tx parameter of the access point station.
 
@@ -71,7 +71,7 @@ class Station:
         return self._Tx
 
     @property
-    def n(self) -> float | None:
+    def n(self) -> Union[float, None]:
         """
         Returns the n parameter of the access point station.
 
@@ -88,7 +88,7 @@ class Station:
         return self._noise_std_dev
     
     @property
-    def missing_packages_probability(self) -> dict | None:
+    def missing_packages_probability(self) -> Union[dict, None]:
         """
         Get the probability of missing packages for the station.
 
