@@ -106,6 +106,7 @@ class App:
         # if milliseconds_per_iteration < 10:
         #    raise ValueError("Minimum frequency is 10 millisecond.")
 
+
         # Define maximal and minimal x and y coordinates
         dim_x = self.config['room_dim_meters']['x']
         dim_y = self.config['room_dim_meters']['y']
@@ -126,14 +127,17 @@ class App:
         # Concatenate date and time to the file names
         current_datetime = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
+        #Define output prefix filename
+        output_prefix = f"{current_datetime}_{self.config['simulation_duration_seconds']}"
+
         # Create output file writers with updated file names
         rssi_writer = BufferedCsvFileWriter(
-            os.path.join(self.output_dir, f"rssi_{current_datetime}.csv"))
+            os.path.join(self.output_dir, f"{output_prefix}_rssi.csv"))
         rssi_writer.write(['timestamp', 'position_x',
                           'position_y', 'station_mac', 'rssi'])
 
         trajectory_writer = BufferedCsvFileWriter(
-            os.path.join(self.output_dir, f"trajectory_{current_datetime}.csv"))
+            os.path.join(self.output_dir, f"{output_prefix}_trajectory.csv"))
         trajectory_writer.write(
             ['step', 'timestamp', 'position_x', 'position_y'])
 
@@ -192,7 +196,7 @@ class App:
             trajectory_writer.close()
 
         # Plot the trajectory data
-        self.plot(trajectory_csv_file=trajectory_writer.filename, dim_x=dim_x, dim_y=dim_y, min_x=min_x, max_x=max_x, min_y=min_y, max_y=max_y, output_name=f'trajectory_{current_datetime}')
+        self.plot(trajectory_csv_file=trajectory_writer.filename, dim_x=dim_x, dim_y=dim_y, min_x=min_x, max_x=max_x, min_y=min_y, max_y=max_y, output_name=f'{output_prefix}_trajectory_plot')
         
 
 
