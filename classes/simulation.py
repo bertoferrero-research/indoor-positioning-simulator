@@ -90,7 +90,7 @@ class Simulation:
                             'position_y', 'station_mac', 'rssi'])
 
         trajectory_writer = BufferedCsvFileWriter(
-            os.path.join(self.output_dir, f"{output_prefix}_trajectory.csv"))
+            os.path.join(self.output_dir, f"{output_prefix}_trajectory.csv"), enabled=self.config.output_trajectory)
         trajectory_writer.write(
             ['step', 'timestamp', 'position_x', 'position_y'])
 
@@ -150,7 +150,8 @@ class Simulation:
         #endregion
 
         # Plot the trajectory data
-        self._plot_trajectory(trajectory_csv_file=trajectory_writer.filename, dim_x=dim_x, dim_y=dim_y, min_x=min_x, max_x=max_x, min_y=min_y, max_y=max_y, output_name=f'{output_prefix}_trajectory_plot')
+        if self.config.output_trajectory:
+            self._plot_trajectory(trajectory_csv_file=trajectory_writer.filename, dim_x=dim_x, dim_y=dim_y, min_x=min_x, max_x=max_x, min_y=min_y, max_y=max_y, output_name=f'{output_prefix}_trajectory_plot')
     
 
     def _plot_trajectory(self, trajectory_csv_file: str, dim_x: float, dim_y: float, min_x: float, max_x: float, min_y: float, max_y: float, output_name: str):

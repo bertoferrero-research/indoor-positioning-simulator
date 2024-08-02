@@ -32,6 +32,7 @@ class Config:
         self.initial_position = config.get('initial_position', {'x': 0, 'y': 0})
         self.speed_meters_second = config.get('speed_meters_second', 0.5)
         self.initial_angle_degrees = config.get('initial_angle_degrees', np.random.uniform(0, 360))
+        self.output_trajectory = config.get('output_trajectory', True) #Indicates if the trajectory is going to be registered (csv extracted and plotted)
 
         # Simulator modules parameters
         simulators = config.get('simulators', {})

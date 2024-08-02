@@ -11,6 +11,7 @@
         "y": 8.465
     },
     "initial_angle_degrees": 180,
+    "output_trajectory": true,
     "simulators":{
         "trajectory": "daniscemgil2017custom",
         "trajectory_parameters": {
