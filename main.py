@@ -7,6 +7,7 @@ from classes.models.station import Station
 from classes.lib.bufferedcsvfilewriter import BufferedCsvFileWriter
 from classes.simulators.trajectory.factory import TrajectoryFactory
 from classes.simulators.rssi.factory import RssiFactory
+from classes.config import Config
 import datetime
 import numpy as np
 
@@ -14,29 +15,10 @@ import numpy as np
 class App:
     def __init__(self, config_path, stations_path, output_dir):
         # Load settings and stations
-        self.loadSettings(config_path=config_path)
+        self.config = Config(config_path=config_path)
         self.loadStations(stations_path=stations_path)
         self.output_dir = output_dir
-        self.position_rounding = 9
-
-    def loadSettings(self, config_path):
-        # First check if the config file exists
-        if not os.path.exists(config_path):
-            raise FileNotFoundError(f"Config file {config_path} not found")
-
-        # Load the config file as json file
-        with open(config_path, 'r') as file:
-            self.config = json.load(file)
-
-        # Check if the config file was loaded correctly
-        if not isinstance(self.config, dict):
-            raise ValueError("Invalid config file format.")
-
-        # Verify coherence
-        if self.config['initial_position']['x'] < self.config['margin_meters'] or self.config['initial_position']['x'] > self.config['room_dim_meters']['x'] - self.config['margin_meters']:
-            raise ValueError("Initial x position is out of bounds.")
-        if self.config['initial_position']['y'] < self.config['margin_meters'] or self.config['initial_position']['y'] > self.config['room_dim_meters']['y'] - self.config['margin_meters']:
-            raise ValueError("Initial y position is out of bounds.")
+        self.position_rounding = 9        
 
     def loadStations(self, stations_path):
         # First check if the config file exists
@@ -98,7 +80,7 @@ class App:
 
     def start(self):
         # Initialize main variables
-        max_time_milliseconds = self.config['simulation_duration_seconds'] * 1000
+        max_time_milliseconds = self.config.simulation_duration_seconds * 1000
         current_time = 0
         iteration = 0
         # min([station.frequency for station in self.stations])
@@ -108,27 +90,26 @@ class App:
 
 
         # Define maximal and minimal x and y coordinates
-        dim_x = self.config['room_dim_meters']['x']
-        dim_y = self.config['room_dim_meters']['y']
-        dim_margins = self.config['margin_meters']
+        dim_x = self.config.room_dim_meters['x']
+        dim_y = self.config.room_dim_meters['y']
+        dim_margins = self.config.margin_meters
         min_x = dim_margins
         max_x = dim_x - dim_margins
         min_y = dim_margins
         max_y = dim_y - dim_margins
-        pos_x = round(self.config['initial_position']
+        pos_x = round(self.config.initial_position
                       ['x'], ndigits=self.position_rounding)
-        pos_y = round(self.config['initial_position']
+        pos_y = round(self.config.initial_position
                       ['y'], ndigits=self.position_rounding)
-        speed = self.config['speed_meters_second']
-        angle = math.radians(self.config.get(
-            'initial_angle_degrees', np.random.uniform(0, 360)))
+        speed = self.config.speed_meters_second
+        angle = math.radians(self.config.initial_angle_degrees)
 
         # Create output file writers
         # Concatenate date and time to the file names
         current_datetime = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
         #Define output prefix filename
-        output_prefix = f"{current_datetime}_{self.config['simulation_duration_seconds']}"
+        output_prefix = f"{current_datetime}_{self.config.simulation_duration_seconds}"
 
         # Create output file writers with updated file names
         rssi_writer = BufferedCsvFileWriter(
@@ -141,17 +122,13 @@ class App:
         trajectory_writer.write(
             ['step', 'timestamp', 'position_x', 'position_y'])
 
-        # Extract simulators configuration
-        simulators_config = self.config.get('simulators', {})
-        trajectory_parameters_list = simulators_config.get('trajectory_parameters', {})
-        rssi_parameters_list = simulators_config.get('rssi_parameters', {})
         # Initialize simulators modules
         position_simulator_module = TrajectoryFactory.create_trajectory_simulator(
-            simulators_config['trajectory'],
-            trajectory_parameters_list.get(simulators_config['trajectory'], {}))
+            self.config.trajectory_simulator_module,
+            self.config.trajectory_simulator_module_parameters)
         rssi_simulator_module = RssiFactory.create_rssi_simulator(
-            simulators_config['rssi'],
-            rssi_parameters_list.get(simulators_config['rssi'], {}))
+            self.config.rssi_simulator_module,
+            self.config.rssi_simulator_module_parameters)
 
         try:
             # Main loop
