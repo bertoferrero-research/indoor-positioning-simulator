@@ -34,3 +34,19 @@ class functionmodels:
         float: The calculated value of the exponential function.
         """
         return a * np.exp(b * x)
+    
+    
+    @staticmethod
+    def lineal(x: float, a: float, b: float) -> float:
+        """
+        Calculates the value of a linear model function.
+
+        Parameters:
+        x (float): The input value.
+        a (float): The slope of the linear model.
+        b (float): The y-intercept of the linear model.
+
+        Returns:
+        float: The calculated value of the linear model function.
+        """
+        return a * x + b

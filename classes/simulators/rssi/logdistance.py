@@ -72,6 +72,13 @@ class LogDistancePathLossModel(RssiInterface):
             if param_a is None or param_b is None:
                 raise ValueError("Missing parameters 'a' and 'b' for the exponential function model.")
             miss_probability = functionmodels.exponential(distance, param_a, param_b)
+        elif function_model == 'lineal':
+            param_a = function_params.get('a', None)
+            param_b = function_params.get('b', None)
+            if param_a is None or param_b is None:
+                raise ValueError("Missing parameters 'a' and 'b' for the lineal function model.")
+            miss_probability = functionmodels.lineal(distance, param_a, param_b)
+
         else:
             return False
         
