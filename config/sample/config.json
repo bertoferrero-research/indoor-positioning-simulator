@@ -1,0 +1,25 @@
+{
+    "simulation_duration_seconds": 60,
+    "room_dim_meters":{
+        "x": 20,
+        "y": 17
+    },
+    "margin_meters": 0.5,
+    "speed_meters_second": 0.5,
+    "initial_position": {
+        "x": 2,
+        "y": 2
+    },
+    "initial_angle": 0,
+    "simulators":{
+        "trajectory": "daniscemgil2017custom",
+        "trajectory_parameters": {
+            "daniscemgil2017custom": {
+                "keep_angle_ms": 300
+            }
+        },
+        "rssi": "logdistance",
+        "rssi_parameters": {
+        }
+    }
+}
