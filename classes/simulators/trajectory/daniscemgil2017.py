@@ -1,12 +1,26 @@
+# Copyright 2024 Alberto Ferrero López
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from classes.simulators.trajectory.interface import TrajectoryInterface
 import numpy as np
 import random
 
 class DanisCemgil2017(TrajectoryInterface):
 
-    def __init__(self):
+    def __init__(self, s: float = 0.07):
         # Inicialización de variables
-        self.s = 0.07                          # desviación estandar de la distribución normal usada para aleatorizar el ángulo. 0 = no hay varianza en el ángulo
+        self.s = s                          # desviación estandar de la distribución normal usada para aleatorizar el ángulo. 0 = no hay varianza en el ángulo
         self.outbounds_ration = np.pi / 8   # To prevent our virtual mobile device from leaving the area, sampled rotation values are deliberately manipulated by an additional value of π8 according to the current orientation
 
     def calculate_position(self, current_time: int, milliseconds_per_iteration: int, last_angle: float, last_x: float, last_y: float, min_x: float, max_x: float, min_y: float, max_y: float, speed: float) -> tuple:
