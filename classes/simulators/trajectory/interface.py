@@ -20,9 +20,6 @@ class TrajectoryInterface(ABC):
 
     This class defines the interface for calculating the position of an object
     based on various parameters.
-
-    Methods:
-        calculate_position: Calculates the position of the object based on the given parameters.
     """
 
     @abstractmethod
