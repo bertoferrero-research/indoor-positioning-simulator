@@ -160,3 +160,7 @@ The simulator generates two CSV files as output. These files are written in real
   - `position_y`: The y-coordinate of the mobile node at this step.
 
 These files will be saved to the directory specified in the `--outdir` parameter during execution.
+
+## License
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE](./LICENSE) file for details.
