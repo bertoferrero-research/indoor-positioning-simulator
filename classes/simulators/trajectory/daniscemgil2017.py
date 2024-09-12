@@ -4,9 +4,9 @@ import random
 
 class DanisCemgil2017(TrajectoryInterface):
 
-    def __init__(self):
+    def __init__(self, s: float = 0.07):
         # Inicialización de variables
-        self.s = 0.07                          # desviación estandar de la distribución normal usada para aleatorizar el ángulo. 0 = no hay varianza en el ángulo
+        self.s = s                          # desviación estandar de la distribución normal usada para aleatorizar el ángulo. 0 = no hay varianza en el ángulo
         self.outbounds_ration = np.pi / 8   # To prevent our virtual mobile device from leaving the area, sampled rotation values are deliberately manipulated by an additional value of π8 according to the current orientation
 
     def calculate_position(self, current_time: int, milliseconds_per_iteration: int, last_angle: float, last_x: float, last_y: float, min_x: float, max_x: float, min_y: float, max_y: float, speed: float) -> tuple:
