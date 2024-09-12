@@ -17,6 +17,23 @@ from classes.models.station import Station
 import random
 
 class DummyRssiModule(RssiInterface):
+    """
+    DummyRssiModule is a class that implements the RssiInterface to simulate RSSI (Received Signal Strength Indicator) values.
+    """
 
     def calculate_rssi(self, station: Station, current_time: int, milliseconds_per_iteration: int, current_x: float, current_y: float, speed: float) -> int:
+        """
+        Returns a random value between -100 and 0 as RSSI value.
+
+        Args:
+            station (Station): The station for which the RSSI is being calculated.
+            current_time (int): The current time in milliseconds.
+            milliseconds_per_iteration (int): The number of milliseconds per iteration.
+            current_x (float): The current x-coordinate of the station.
+            current_y (float): The current y-coordinate of the station.
+            speed (float): The speed of the station.
+
+        Returns:
+            int: The calculated RSSI value, ranging from -100 to 0.
+        """
         return random.randint(-100, 0)

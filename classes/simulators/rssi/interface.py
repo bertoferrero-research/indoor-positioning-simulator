@@ -16,7 +16,24 @@ from abc import ABC, abstractmethod
 from classes.models.station import Station
 
 class RssiInterface(ABC):
+    """
+    RssiInterface is an abstract base class that defines the interface for calculating RSSI (Received Signal Strength Indicator).
+    """
 
     @abstractmethod
     def calculate_rssi(self, station: Station, current_time: int, milliseconds_per_iteration: int, current_x: float, current_y: float, speed: float) -> int:
+        """
+        Calculate the Received Signal Strength Indicator (RSSI) for a given station at a specific time and position.
+
+        Args:
+            station (Station): The station for which the RSSI is being calculated.
+            current_time (int): The current time in the simulation.
+            milliseconds_per_iteration (int): The number of milliseconds per iteration in the simulation.
+            current_x (float): The current x-coordinate of the station.
+            current_y (float): The current y-coordinate of the station.
+            speed (float): The speed of the station.
+
+        Returns:
+            int: The calculated RSSI value.
+        """
         pass

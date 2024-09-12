@@ -28,13 +28,52 @@ import numpy as np
 
 
 class App:
+    """
+    App class for initializing and running the indoor positioning simulator.
+
+    Attributes:
+        config (Config): Configuration settings loaded from the config file.
+        output_dir (str): Directory where output files will be saved.
+    """
     def __init__(self, config_path, stations_path, output_dir):
+        """
+        Initializes the simulator with the given configuration and station data.
+
+        Args:
+            config_path (str): Path to the configuration file.
+            stations_path (str): Path to the file containing station data.
+            output_dir (str): Directory where output files will be saved.
+        """
         # Load settings and stations
         self.config = Config(config_path=config_path)
         self.loadStations(stations_path=stations_path)
         self.output_dir = output_dir 
 
     def loadStations(self, stations_path):
+        """
+        Load station configurations from a JSON file.
+        Args:
+            stations_path (str): The file path to the JSON file containing station definitions.
+        Raises:
+            FileNotFoundError: If the stations definition file does not exist.
+            ValueError: If the stations definition file format is invalid or if required fields are missing.
+        The JSON file should contain a list of station definitions, where each station is a dictionary
+        with, at least, the following keys:
+            - mac (str): The MAC address of the station.
+            - x (float): The x-coordinate of the station.
+            - y (float): The y-coordinate of the station.
+            - frequency (float): The frequency of the station.
+        Example of a valid JSON file content:
+        [
+            {
+            "mac": "001122334455",
+            "x": 10.0,
+            "y": 20.0,
+            "frequency": 250
+            },
+            ...
+        ]
+        """
         # First check if the config file exists
         if not os.path.exists(stations_path):
             raise FileNotFoundError(
@@ -57,6 +96,15 @@ class App:
             self.stations.append(Station(**station))
 
     def run_simulation(self):
+        """
+        Runs the indoor positioning simulation.
+
+        This method initializes a Simulation object with the provided configuration,
+        stations, and output directory, and then starts the simulation process.
+
+        Returns:
+            None
+        """
         simulation = Simulation(self.config, self.stations, self.output_dir)
         simulation.start()
 

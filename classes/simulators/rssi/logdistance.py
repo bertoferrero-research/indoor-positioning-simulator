@@ -20,8 +20,25 @@ import numpy as np
 import random
 
 class LogDistancePathLossModel(RssiInterface):
+    '''
+    LogDistancePathLossModel is a class that implements the RssiInterface to calculate the Received Signal Strength Indicator (RSSI) using the Log-Distance Path Loss model.
+    '''
 
     def calculate_rssi(self, station: Station, current_time: int, milliseconds_per_iteration: int, current_x: float, current_y: float, speed: float) -> int:
+        """
+        Calculate the Received Signal Strength Indicator (RSSI) for a given station and current position.
+        Args:
+            station (Station): The station object containing transmission parameters and position.
+            current_time (int): The current time in milliseconds. Not used in this model.
+            milliseconds_per_iteration (int): The time interval per iteration in milliseconds. Not used in this model.
+            current_x (float): The current x-coordinate of the receiver.
+            current_y (float): The current y-coordinate of the receiver.
+            speed (float): The speed of the receiver. Not used in this model.
+        Returns:
+            int: The calculated RSSI value, rounded to the nearest integer. Returns None if the package should be missed or if the RSSI is less than -100.
+        Raises:
+            ValueError: If the Tx or n values are not available for the station.
+        """
         # Get Tx and n from station, if not available throw exception
         Tx = station.Tx
         n = station.n

@@ -19,6 +19,23 @@ import numpy as np
 
 
 class Config:
+    """
+    Config class for loading, extracting, and validating simulation configuration parameters.
+    Attributes:
+        simulation_duration_seconds (int): Duration of the simulation in seconds.
+        room_dim_meters (dict): Dimensions of the room in meters.
+        margin_meters (float): Margin in meters.
+        initial_position (dict): Initial position with 'x' and 'y' coordinates.
+        speed_meters_second (float): Speed in meters per second.
+        initial_angle_degrees (float): Initial angle in degrees.
+        output_trajectory (bool): Indicates if the trajectory is going to be registered.
+        trajectory_simulator_module (str): Name of the trajectory simulator module.
+        trajectory_simulator_parameters (dict): General configuration for all possible modules.
+        trajectory_simulator_module_parameters (dict): Specific configuration for the selected trajectory module.
+        rssi_simulator_module (str): Name of the RSSI simulator module.
+        rssi_simulator_parameters (dict): General configuration for all possible RSSI modules.
+        rssi_simulator_module_parameters (dict): Specific configuration for the selected RSSI module.
+    """
     def __init__(self, config_path):
         # Load the configuration file
         config = self._load_config_file(config_path)
@@ -60,6 +77,22 @@ class Config:
         self.rssi_simulator_module_parameters = self.rssi_simulator_parameters.get(self.rssi_simulator_module, {})
 
     def _validate_config(self):
+        """
+        Validates the configuration parameters for the simulation.
+        Raises:
+            ValueError: If any of the configuration parameters are invalid.
+        Validations:
+            - Simulation duration must be greater than 0.
+            - Room dimensions must be provided and include 'x' and 'y' indices.
+            - Room dimensions must be greater than 0.
+            - Margin must be greater or equal to 0.
+            - Initial position must include 'x' and 'y' indices and be greater or equal to 0.
+            - Speed must be greater than 0.
+            - Initial angle must be between 0 and 360 degrees.
+            - Trajectory simulator module must be provided.
+            - RSSI simulator module must be provided.
+            - Initial position must be within the bounds of the room dimensions considering the margin.
+        """
 
         # Basic parameters restrictions
         if self.simulation_duration_seconds <= 0:
