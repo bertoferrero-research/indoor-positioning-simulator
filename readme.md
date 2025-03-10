@@ -2,10 +2,7 @@
 
 This is a simulator for trajectories and RSSI signals inside a room, developed for studying indoor positioning systems. The mobile node captures signals as it moves through a simulated environment, helping researchers analyze positioning techniques.
 
-
-## Citation
-
-If you use this project or part of it in your research, please cite it using one or both of the following BibTeX entries:
+Please, cite one or both the following works for any use of the code or for a reference to the pusblished work:
 
 ```bibtex
 @inproceedings{ferrero_indoor_positioning_simulator,
