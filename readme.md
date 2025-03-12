@@ -20,7 +20,9 @@ Please, cite one or both the following works for any use of the code or for a re
   author = {Ferrero-Lopez, Alberto and Gallego, Antonio Javier and Lozano, Miguel Angel},
   title = {Bluetooth Low Energy Indoor Positioning: A Fingerprinting Neural Network Approach},
   journal = {Internet Of Things},
-  year = {2025}
+  year = {2025},
+  pages = {101565},
+  doi = {10.1016/j.iot.2025.101565}
 }
 ```
 
