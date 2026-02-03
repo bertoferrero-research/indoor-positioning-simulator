@@ -14,7 +14,8 @@ Please, cite one or both the following works for any use of the code or for a re
   number={},
   pages={236-241},
   keywords={Training;Costs;Accuracy;Fingerprint recognition;Data collection;Noise measurement;Received signal strength indicator;IP networks;Indoor positioning systems;Synthetic data;Indoor Positioning;Fingerprint;Synthetic Data Generation},
-  doi={10.1109/AMLDS63918.2025.11159389}}
+  doi={10.1109/AMLDS63918.2025.11159389}
+}
 ```
 
 ```bibtex
