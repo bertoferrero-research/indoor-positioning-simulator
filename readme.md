@@ -2,7 +2,7 @@
 
 This is a simulator for trajectories and RSSI signals inside a room, developed for studying indoor positioning systems. The mobile node captures signals as it moves through a simulated environment, helping researchers analyze positioning techniques.
 
-Please, cite one or both the following works for any use of the code or for a reference to the pusblished work:
+Please, cite the following work for any use of the code or for a reference to the pusblished work:
 
 ```bibtex
 @inproceedings{FerreroLopez2025simulator,
@@ -18,16 +18,6 @@ Please, cite one or both the following works for any use of the code or for a re
 }
 ```
 
-```bibtex
-@article{FerreroLopez2025ipsNetwork,
-  author = {Ferrero-Lopez, Alberto and Gallego, Antonio Javier and Lozano, Miguel Angel},
-  title = {Bluetooth Low Energy Indoor Positioning: A Fingerprinting Neural Network Approach},
-  journal = {Internet Of Things},
-  year = {2025},
-  pages = {101565},
-  doi = {10.1016/j.iot.2025.101565}
-}
-```
 
 ## Installation
 
